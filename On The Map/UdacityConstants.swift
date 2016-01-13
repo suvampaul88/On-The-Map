@@ -25,7 +25,7 @@ extension UdacityClient {
         // MARK: Session
         static let Session = "session"
         
-        //MARK: Public User ID
+        //MARK: Public User Data
         static let Users =  "users/{user_id}"
 
     }
@@ -48,9 +48,12 @@ extension UdacityClient {
     struct JSONResponseKeys {
         
         // MARK: Login
-        static let userKey = "key"
+        static let UserKey = "key"
         static let Account = "account"
         static let Session = "session"
+        static let ID = "id"
+        static let User = "user"
+        static let Email =  "email"
 
     }
     

@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SigninPage" id="BYZ-38-t0r" customClass="ViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -124,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="690"/>
+            <point key="canvasLocation" x="344" y="690"/>
         </scene>
         <!--View When Login Successful Controller-->
         <scene sceneID="2zD-Nq-nhY">
@@ -137,8 +137,30 @@
                     <view key="view" contentMode="scaleToFill" id="cmi-CY-cYh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c29-hO-cRc">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="View" id="0Ba-0R-beH">
+                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="Dsd-Ot-Jpb">
+                                            <connections>
+                                                <action selector="logoutUdacity:" destination="H3a-zG-pe9" id="4LL-t2-Z2S"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="c29-hO-cRc" secondAttribute="trailing" id="1cP-86-b8Y"/>
+                            <constraint firstItem="c29-hO-cRc" firstAttribute="top" secondItem="MrZ-oG-c4n" secondAttribute="bottom" id="Ich-f4-QAO"/>
+                            <constraint firstItem="c29-hO-cRc" firstAttribute="leading" secondItem="cmi-CY-cYh" secondAttribute="leading" id="eFC-0s-3cB"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logoutButton" destination="Dsd-Ot-Jpb" id="w4T-e7-wIE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWq-4x-zol" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
