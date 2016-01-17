@@ -54,6 +54,7 @@ extension UdacityClient {
         static let ID = "id"
         static let User = "user"
         static let Email =  "email"
+        static let Address = "address"
 
     }
     
