@@ -126,7 +126,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hmd-Z2-eaD">
                                 <rect key="frame" x="0.0" y="73" width="600" height="475"/>
                                 <connections>
-                                    <outlet property="delegate" destination="TyH-iq-Bti" id="cPf-sG-EUh"/>
+                                    <outlet property="delegate" destination="TyH-iq-Bti" id="NDD-NI-u1d"/>
                                 </connections>
                             </mapView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-Rm-jGW">
@@ -154,8 +154,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="MapView" destination="Hmd-Z2-eaD" id="hwX-AM-Pwr"/>
                         <outlet property="logoutButton" destination="OSK-a2-mmk" id="Af5-un-ndz"/>
+                        <outlet property="mapView" destination="Hmd-Z2-eaD" id="wKl-lv-wF6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fWu-64-9Ni" userLabel="First Responder" sceneMemberID="firstResponder"/>

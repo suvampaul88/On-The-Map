@@ -12,10 +12,10 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
-    @IBOutlet weak var MapView: MKMapView!
     
     
     @IBOutlet weak var logoutButton: UIBarButtonItem!
+    @IBOutlet weak var mapView: MKMapView!
     
     
 
@@ -26,25 +26,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MapView.delegate = self
+        mapView.delegate = self
  
-//        ParseClient.sharedInstance().getStudentLocations() { locations, error in
-//            if let locations = locations {
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    self.locations = locations
-//                    self.mapView.reloadInputViews()
-//                    self.setLocationsOnMap()
-//                }
-//            } else {
-//                print(error)
-//            }
-//        }
-        
-        
         ParseClient.sharedInstance().getStudentLocations() { locations, error in
             if let locations = locations {
+                dispatch_async(dispatch_get_main_queue()) {
                     self.locations = locations
-                    print(locations)
+                    self.mapView.reloadInputViews()
+                    self.setLocationsOnMap()
+                }
             } else {
                 print(error)
             }
@@ -89,7 +79,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
         // When the array is complete, we add the annotations to the map.
-        MapView.addAnnotations(annotations)
+        mapView.addAnnotations(annotations)
     }
     
     
