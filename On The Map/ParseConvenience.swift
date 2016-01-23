@@ -16,9 +16,10 @@ extension ParseClient {
     func getStudentLocations(completionHandler: (result: [StudentLocations]?, error: NSError?) -> Void) -> NSURLSessionDataTask? {
         
         /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        let parameters = [ParseClient.JSONBodyKeys.Limit: ParseClient.Constants.Number]
         
         /* 2. Make the request */
-        let task = taskForGETMethod(ParseClient.Methods.StudentLocation, parameters: nil) { JSONResult, error in
+        let task = taskForGETMethod(ParseClient.Methods.StudentLocation, parameters: parameters) { JSONResult, error in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {

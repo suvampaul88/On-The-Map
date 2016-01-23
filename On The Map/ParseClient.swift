@@ -8,7 +8,7 @@
 
 import Foundation
 
-//MARK: - Udacity: NSObject
+//MARK: - Parse: NSObject
 
 class ParseClient : NSObject {
     
@@ -38,7 +38,7 @@ class ParseClient : NSObject {
         //There are none
         
         /* 2/3. Build the URL and configure the request */
-        let urlString = Constants.BaseURLSecure + method
+        let urlString = ParseClient.Constants.BaseURLSecure + method + ParseClient.escapedParameters(parameters!)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         request.addValue("\(ParseClient.Constants.ParseApplicationID)", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -73,7 +73,7 @@ class ParseClient : NSObject {
             }
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
-            UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
         
         /* 7. Start the request */
@@ -94,7 +94,7 @@ class ParseClient : NSObject {
         //There are none
         
         /* 2/3. Build the URL and configure the request */
-        let urlString = Constants.BaseURLSecure + method
+        let urlString = ParseClient.Constants.BaseURLSecure + method
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
@@ -132,7 +132,7 @@ class ParseClient : NSObject {
             }
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
-            UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
         
         /* 7. Start the request */

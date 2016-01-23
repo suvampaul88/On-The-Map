@@ -114,8 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				B100D3AE1C3B29CC0074D936 /* Main.storyboard */,
-				B1637DD81C5043AC00E30B0F /* Parse */,
 				B100D3E71C3F21010074D936 /* Controller */,
+				B1637DD81C5043AC00E30B0F /* Parse */,
 				B100D3E01C3DFE270074D936 /* Udacity */,
 				B100D3AA1C3B29CC0074D936 /* AppDelegate.swift */,
 				B100D3B11C3B29CC0074D936 /* Assets.xcassets */,
