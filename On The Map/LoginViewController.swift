@@ -1,56 +1,54 @@
 //
-//  ViewWhenLoginSuccessfulController.swift
+//  LoginViewController.swift
 //  On The Map
 //
-//  Created by Suvam Paul on 1/5/16.
+//  Created by Suvam Paul on 1/4/16.
 //  Copyright © 2016 Suvam Paul. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class ViewWhenLoginSuccessfulController: UIViewController {
+class LoginViewController: UIViewController {
 
     
-    
-    @IBOutlet weak var logoutButton: UIBarButtonItem!
-    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signupButton: UIButton!
+
+    //still need a label
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        /* Get the shared URL session */
         
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
-    @IBAction func logoutUdacity(sender: AnyObject) {
-        UdacityClient.sharedInstance().logoutUdacity() {(success, ID, error) in
+
+    @IBAction func loginButtonTouch(sender: AnyObject) {
+        
+        UdacityClient.sharedInstance().authenticateWithUdacityServer(self.emailTextField!.text!, password: self.passwordTextField!.text!) {(success, errorString) in
             if success {
-                self.completeLogout()
-                //alternatives
-                //self.dismissViewControllerAnimated(true, completion: nil)
-                //http://stackoverflow.com/questions/25962693/dismissviewcontrolleranimated-does-not-dismiss-view-controller
+                self.completeLogin()
             } else {
-                self.displayError(error)
+                self.displayError(errorString)
             }
         }
     }
-        
     
-    func completeLogout() {
+    
+    func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SigninPage") as! ViewController
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController")
             self.presentViewController(controller, animated: true, completion: nil)
         })
     }
-    
-    
+        
     func displayError(errorString: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let errorString = errorString {
@@ -58,5 +56,4 @@ class ViewWhenLoginSuccessfulController: UIViewController {
             }
         })
     }
-    
 }

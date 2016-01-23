@@ -14,7 +14,6 @@ extension UdacityClient {
     // MARK: Constants
     struct Constants {
         
-        static let BaseURL : String = "http://www.udacity.com/api/"
         static let BaseURLSecure : String = "https://www.udacity.com/api/"
         
     }
@@ -53,8 +52,8 @@ extension UdacityClient {
         static let Session = "session"
         static let ID = "id"
         static let User = "user"
-        static let Email =  "email"
-        static let Address = "address"
+        static let LastName =  "last_name"
+        static let FirstName = "first_name"
 
     }
     

@@ -21,11 +21,13 @@ extension UdacityClient {
 
                     self.userID = userID
                     print(self.userID)
-                    self.getPublicUserData() {(success, address, error) in
+                    self.getPublicUserData() {(success, firstName, lastName, error) in
                         
                         if success {
-                            self.emailAddress = address
-                            print(address)
+                            self.firstName = firstName
+                            self.lastName = lastName
+                            print(firstName)
+                            print(lastName)
                         } else {
                             completionHandler(success: success, errorString: error)
                         }
@@ -50,7 +52,7 @@ extension UdacityClient {
 //        let jsonBody : [String: AnyObject] = ["udacity": ["username": "\(username)", "password": "\(password)"]]
 
         /* 2. Make the request */
-        taskForPOSTMethod(Methods.Session, parameters: nil, jsonBody: jsonBody) { JSONResult, error in
+        taskForPOSTMethod(UdacityClient.Methods.Session, parameters: nil, jsonBody: jsonBody) { JSONResult, error in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
@@ -69,7 +71,7 @@ extension UdacityClient {
     
     
     
-    func logoutUdacity(completionHandler: (Success: Bool, ID: String?, error: NSError?) -> Void) {
+    func logoutUdacity(completionHandler: (success: Bool, ID: String?, error: NSError?) -> Void) {
         
         
         /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
@@ -77,18 +79,18 @@ extension UdacityClient {
 
         
         /* 2. Make the request */
-        taskForDELETEMethod(Methods.Session, parameters: nil) { JSONResult, error in
+        taskForDELETEMethod(UdacityClient.Methods.Session, parameters: nil) { JSONResult, error in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
-                completionHandler(Success: false, ID: nil, error: error)
+                completionHandler(success: false, ID: nil, error: error)
             } else {
                 if let results = JSONResult[UdacityClient.JSONResponseKeys.Session] as? [String: AnyObject] {
                     let ID = results[UdacityClient.JSONResponseKeys.ID] as? String
-                    completionHandler(Success: true, ID: ID, error: nil)
+                    completionHandler(success: true, ID: ID, error: nil)
                     print(ID)
             } else {
-                completionHandler(Success: false, ID: nil, error: NSError(domain: "Logout Parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse logout Udacity"]))
+                completionHandler(success: false, ID: nil, error: NSError(domain: "Logout Parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse logout Udacity"]))
                 }
             }
         }
@@ -96,10 +98,10 @@ extension UdacityClient {
     
     
     
-    func getPublicUserData(completionHandler: (success: Bool, address: String?, error: NSError?) -> Void) {
+    func getPublicUserData(completionHandler: (success: Bool, firstName: String?, lastName: String?, error: NSError?) -> Void) {
         
         /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
-        var mutableMethod : String = Methods.Users
+        var mutableMethod : String = UdacityClient.Methods.Users
         mutableMethod = UdacityClient.subtituteKeyInMethod(mutableMethod, key: UdacityClient.URLKeys.UserID, value: String(UdacityClient.sharedInstance().userID!))!
         
         /* 2. Make the request */
@@ -107,22 +109,17 @@ extension UdacityClient {
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
-                completionHandler(success: false, address: nil, error: error)
+                completionHandler(success: false, firstName: nil, lastName: nil, error: error)
             } else {
                 
                 if let results = JSONResult[UdacityClient.JSONResponseKeys.User] as? [String : AnyObject] {
-                    
-                    if let email = results[UdacityClient.JSONResponseKeys.Email] as? [String : AnyObject] {
-                        let address = email[UdacityClient.JSONResponseKeys.Address] as? String
-                        completionHandler(success: true, address: address, error: error)
-                        print(address)
-                    } else {
-                        completionHandler(success: false, address: nil, error: NSError(domain: "getPublicUserData parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse email"]))
-                    }
-                    
-                    //getting email didn't work
+
+                    let firstName =  results[UdacityClient.JSONResponseKeys.FirstName] as? String
+                    let lastName = results[UdacityClient.JSONResponseKeys.LastName] as? String
+                    completionHandler(success: true, firstName: firstName, lastName: lastName, error: nil)
+
                 } else {
-                    completionHandler(success: false, address: nil, error: NSError(domain: "getPublicUserData parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse results"]))
+                    completionHandler(success: false, firstName: nil, lastName: nil, error: NSError(domain: "getPublicUserData parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse results"]))
                 }
             }
         }
