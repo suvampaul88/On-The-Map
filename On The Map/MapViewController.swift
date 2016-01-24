@@ -86,9 +86,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func logoutUdacity(sender: AnyObject) {
         UdacityClient.sharedInstance().logoutUdacity() {(success, ID, error) in
             if success {
-//                self.completeLogout()
-                //alternatives
-                self.dismissViewControllerAnimated(true, completion: nil)
+                dispatch_async(dispatch_get_main_queue(), {
+                  self.dismissViewControllerAnimated(true, completion: nil)  
+                })
             } else {
                 self.displayError(error)
             }
