@@ -24,9 +24,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         mapView.delegate = self
+        
+        
+//        self.parentViewController!.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Reply, target: self, action: "logoutButtonTouchUp")
+//        
+//        func logoutButtonTouchUp() {
+//            self.dismissViewControllerAnimated(true, completion: nil)
+//        }
  
         ParseClient.sharedInstance().getStudentLocations() { locations, error in
             if let locations = locations {
@@ -42,12 +50,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     
     func setLocationsOnMap () {
         
@@ -55,8 +57,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         for location in locations {
             
-            // Notice that the float values are being used to create CLLocationDegree values.
-            // This is a version of the Double type.
             let lat = CLLocationDegrees(location.latitude as Float)
             let long = CLLocationDegrees(location.longitude as Float)
             
@@ -86,10 +86,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func logoutUdacity(sender: AnyObject) {
         UdacityClient.sharedInstance().logoutUdacity() {(success, ID, error) in
             if success {
-                self.completeLogout()
+//                self.completeLogout()
                 //alternatives
-                //self.dismissViewControllerAnimated(true, completion: nil)
-                //http://stackoverflow.com/questions/25962693/dismissviewcontrolleranimated-does-not-dismiss-view-controller
+                self.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 self.displayError(error)
             }

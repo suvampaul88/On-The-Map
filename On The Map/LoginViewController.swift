@@ -42,13 +42,21 @@ class LoginViewController: UIViewController {
     }
     
     
+//    func completeLogin() {
+//        dispatch_async(dispatch_get_main_queue(), {
+//            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController")
+//            self.presentViewController(controller, animated: true, completion: nil)
+//        })
+//    }
+//    
+    
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController")
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ManagerNavigationController") as! UINavigationController
             self.presentViewController(controller, animated: true, completion: nil)
         })
     }
-        
+    
     func displayError(errorString: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let errorString = errorString {

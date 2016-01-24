@@ -20,14 +20,11 @@ extension UdacityClient {
                 if let userID = userID {
 
                     self.userID = userID
-                    print(self.userID)
                     self.getPublicUserData() {(success, firstName, lastName, error) in
                         
                         if success {
                             self.firstName = firstName
                             self.lastName = lastName
-                            print(firstName)
-                            print(lastName)
                         } else {
                             completionHandler(success: success, errorString: error)
                         }
@@ -61,7 +58,6 @@ extension UdacityClient {
                 if let results = JSONResult[UdacityClient.JSONResponseKeys.Account] as? [String: AnyObject] {
                     let userID = results[UdacityClient.JSONResponseKeys.UserKey] as? String
                     completionHandler(Success: true, userID: userID, error: nil)
-                    print(userID)
                 } else {
                     completionHandler(Success: false, userID: nil, error: NSError(domain: "Login parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse loginThroughUdacity"]))
                 }
@@ -88,7 +84,6 @@ extension UdacityClient {
                 if let results = JSONResult[UdacityClient.JSONResponseKeys.Session] as? [String: AnyObject] {
                     let ID = results[UdacityClient.JSONResponseKeys.ID] as? String
                     completionHandler(success: true, ID: ID, error: nil)
-                    print(ID)
             } else {
                 completionHandler(success: false, ID: nil, error: NSError(domain: "Logout Parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse logout Udacity"]))
                 }
