@@ -123,6 +123,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="aDf-Tj-ItL" kind="relationship" relationship="viewControllers" id="6av-Rt-zgZ"/>
+                        <segue destination="T2d-Eq-wBr" kind="relationship" relationship="viewControllers" id="X4Q-EB-bey"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tln-Iz-x3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -145,6 +146,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hW8-4S-DFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="491" y="1543"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="L0m-qH-pSb">
+            <objects>
+                <navigationController id="T2d-Eq-wBr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" image="Table" id="dou-pe-ZvV"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vke-di-t0L">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="V55-qp-Kny" kind="relationship" relationship="rootViewController" id="DgB-hh-mkJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="udg-V2-UOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="491" y="2321"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="O5E-It-sTK">
@@ -173,9 +191,62 @@
             </objects>
             <point key="canvasLocation" x="1302" y="1543"/>
         </scene>
+        <!--On The Map-->
+        <scene sceneID="bz4-vC-N3o">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xft-KB-Bcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="V55-qp-Kny" customClass="TableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fQG-G2-ffs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentLocationTableViewCell" textLabel="NGL-iu-a3P" detailTextLabel="QKn-Pf-NfD" style="IBUITableViewCellStyleSubtitle" id="M5U-0A-MMp">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M5U-0A-MMp" id="3Hz-sP-9be">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NGL-iu-a3P">
+                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QKn-Pf-NfD">
+                                            <rect key="frame" x="15" y="25" width="31" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="On The Map" id="jhU-6o-fZf">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Whq-4j-NiP">
+                            <connections>
+                                <action selector="loutoutUdacity:" destination="V55-qp-Kny" id="1Ys-QE-7pT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="loutoutButton" destination="Whq-4j-NiP" id="5kp-aI-b24"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1302" y="2315"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Map" width="32" height="32"/>
+        <image name="Table" width="32" height="32"/>
         <image name="Udacity" width="256" height="256"/>
     </resources>
 </document>

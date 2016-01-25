@@ -29,13 +29,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.delegate = self
         
-        
-//        self.parentViewController!.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Reply, target: self, action: "logoutButtonTouchUp")
-//        
-//        func logoutButtonTouchUp() {
-//            self.dismissViewControllerAnimated(true, completion: nil)
-//        }
- 
         ParseClient.sharedInstance().getStudentLocations() { locations, error in
             if let locations = locations {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -87,20 +80,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         UdacityClient.sharedInstance().logoutUdacity() {(success, ID, error) in
             if success {
                 dispatch_async(dispatch_get_main_queue(), {
-                  self.dismissViewControllerAnimated(true, completion: nil)  
+                  self.dismissViewControllerAnimated(true, completion: nil)
                 })
             } else {
                 self.displayError(error)
             }
         }
-    }
-    
-    
-    func completeLogout() {
-        dispatch_async(dispatch_get_main_queue(), {
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SigninPage") as! LoginViewController
-            self.presentViewController(controller, animated: true, completion: nil)
-        })
     }
     
     
@@ -132,8 +117,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    // This delegate method is implemented to respond to taps. It opens the system browser
-    // to the URL specified in the annotationViews subtitle property.
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()

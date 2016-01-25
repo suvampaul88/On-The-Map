@@ -40,15 +40,7 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
-    
-//    func completeLogin() {
-//        dispatch_async(dispatch_get_main_queue(), {
-//            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapViewController")
-//            self.presentViewController(controller, animated: true, completion: nil)
-//        })
-//    }
-//    
+     
     
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
