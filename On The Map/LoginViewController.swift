@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -20,27 +20,36 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        /* Get the shared URL session */
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
+    
     @IBAction func loginButtonTouch(sender: AnyObject) {
         
         UdacityClient.sharedInstance().authenticateWithUdacityServer(self.emailTextField!.text!, password: self.passwordTextField!.text!) {(success, errorString) in
+            
             if success {
                 self.completeLogin()
+                
             } else {
-                self.displayError(errorString)
+                
+                self.presentAlert(errorString)
+
             }
+            
         }
+        
     }
-     
+    
+    
+    @IBAction func signupUdacity(sender: AnyObject) {
+        let app = UIApplication.sharedApplication()
+        app.openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
+    }
+    
     
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
@@ -49,11 +58,38 @@ class LoginViewController: UIViewController {
         })
     }
     
-    func displayError(errorString: NSError?) {
+    
+    func presentAlert(errorString: NSError?) {
+        
         dispatch_async(dispatch_get_main_queue(), {
-            if let errorString = errorString {
-                print(errorString)
+            
+            let action: UIAlertController = UIAlertController(title: "Login Failed", message: "\(errorString?.description)", preferredStyle: .ActionSheet)
+            
+            let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+                //Dismiss the action sheet
             }
+            
+            action.addAction(cancelAction)
+            
+            self.presentViewController(action, animated: true, completion: nil)
+            
         })
+    
     }
+    
+    
+    //functions for textfield
+    
+    //keyboard disappears when return button is pressed
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true;
+    }
+    
+    //dismiss keyboard
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.text = ""
+    }
+    
 }

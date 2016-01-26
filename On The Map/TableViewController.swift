@@ -74,7 +74,6 @@ class TableViewController: UITableViewController {
     }
     
     
-    //NOTE: I can't seem to get to details view controller from table view
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let app = UIApplication.sharedApplication()
         let toOpen = locations[indexPath.row].mediaURL

@@ -16,6 +16,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var refreshMapViewButton: UIBarButtonItem!
     
     
 
@@ -88,6 +89,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    
+    @IBAction func refreshMapView(sender: AnyObject) {
+        
+    }
+
     
     func displayError(errorString: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {

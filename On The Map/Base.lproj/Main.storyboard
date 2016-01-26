@@ -44,6 +44,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.50530510979729726" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Zlh-QM-yLJ"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ayA-1d-pwz" userLabel="Password Text Field">
                                 <rect key="frame" x="144" y="281" width="313" height="45"/>
@@ -54,6 +57,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.50530510979999999" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xrP-hv-JzR"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gnw-rT-VZ5" userLabel="Login Button">
                                 <rect key="frame" x="144" y="334" width="313" height="45"/>
@@ -66,7 +72,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginButtonTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Ox-MK-wvV"/>
+                                    <action selector="loginButtonTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yHc-5i-Vik"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6A-Dl-b1C" userLabel="Sign up to Udacity Button">
@@ -79,6 +85,9 @@
                                 <state key="normal" title="Don't have an account? Sign Up">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="signupUdacity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TGB-YK-yog"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="0.80854096283783783" colorSpace="calibratedRGB"/>
@@ -181,10 +190,16 @@
                                 <action selector="logoutUdacity:" destination="cUL-ii-dvt" id="Hxi-bT-Dbs"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="hGn-AO-wIq">
+                            <connections>
+                                <action selector="refreshMapView:" destination="cUL-ii-dvt" id="vFT-DZ-N67"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="logoutButton" destination="zTT-YJ-Yq6" id="2Me-VZ-G35"/>
                         <outlet property="mapView" destination="g1j-wP-JZs" id="BTH-7i-BOf"/>
+                        <outlet property="refreshMapViewButton" destination="hGn-AO-wIq" id="wDO-MI-Rna"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VkW-mU-MLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -194,7 +209,6 @@
         <!--On The Map-->
         <scene sceneID="bz4-vC-N3o">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xft-KB-Bcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="V55-qp-Kny" customClass="TableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fQG-G2-ffs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -234,12 +248,14 @@
                                 <action selector="loutoutUdacity:" destination="V55-qp-Kny" id="1Ys-QE-7pT"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="urL-Qd-ppv"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="loutoutButton" destination="Whq-4j-NiP" id="5kp-aI-b24"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xft-KB-Bcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1302" y="2315"/>
         </scene>
