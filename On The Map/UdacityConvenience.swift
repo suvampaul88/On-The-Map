@@ -14,11 +14,11 @@ extension UdacityClient {
     func authenticateWithUdacityServer(username: String, password: String, completionHandler: (success: Bool, errorString: NSError?) -> Void) {
         
         self.loginThroughUdacity(username, password: password) { (success, userID, error) in
-
+            
             if success {
- 
+                
                 if let userID = userID {
-
+                    
                     self.userID = userID
                     self.getPublicUserData() {(success, firstName, lastName, error) in
                         
@@ -29,14 +29,16 @@ extension UdacityClient {
                             completionHandler(success: success, errorString: error)
                         }
                     }
-                        completionHandler(success: success, errorString: error)
-                    }
+                    completionHandler(success: success, errorString: error)
+                }
             } else {
                 completionHandler(success: success, errorString: error)
             }
             
         }
     }
+
+    
     
 
     

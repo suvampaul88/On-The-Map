@@ -30,6 +30,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.delegate = self
         
+//        ParseClient.sharedInstance().getStudentLocations() { locations, error in
+//            if let locations = locations {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    self.locations = locations
+//                    self.mapView.reloadInputViews()
+//                    self.setLocationsOnMap()
+//                }
+//            } else {
+//                print(error)
+//            }
+//        }
+        getLocationsForMap()
+        
+    }
+    
+    
+    func getLocationsForMap () {
         ParseClient.sharedInstance().getStudentLocations() { locations, error in
             if let locations = locations {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -39,11 +56,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
             } else {
                 print(error)
+                let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+                    // Do nothing
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         }
-        
+
     }
-    
     
     func setLocationsOnMap () {
         

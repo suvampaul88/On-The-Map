@@ -248,7 +248,11 @@
                                 <action selector="loutoutUdacity:" destination="V55-qp-Kny" id="1Ys-QE-7pT"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="urL-Qd-ppv"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="urL-Qd-ppv">
+                            <connections>
+                                <action selector="refreshStudentLocationsData:" destination="V55-qp-Kny" id="V1s-mb-JSF"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

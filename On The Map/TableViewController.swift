@@ -22,16 +22,17 @@ class TableViewController: UITableViewController {
         
         tableView.delegate = self
         
-        ParseClient.sharedInstance().getStudentLocations() { locations, error in
-            if let locations = locations {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.locations = locations
-                    self.tableView.reloadData()
-                }
-            } else {
-                print(error)
-            }
-        }
+//        ParseClient.sharedInstance().getStudentLocations() { locations, error in
+//            if let locations = locations {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    self.locations = locations
+//                    self.tableView.reloadData()
+//                }
+//            } else {
+//                print(error)
+//            }
+//        }
+        renderStudentLocationsInTable()
         
     }
     
@@ -48,6 +49,11 @@ class TableViewController: UITableViewController {
         }
     }
 
+    
+    @IBAction func refreshStudentLocationsData(sender: AnyObject) {
+        renderStudentLocationsInTable()
+    }
+    
     
     func displayError(errorString: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
@@ -78,5 +84,25 @@ class TableViewController: UITableViewController {
         let app = UIApplication.sharedApplication()
         let toOpen = locations[indexPath.row].mediaURL
             app.openURL(NSURL(string:toOpen)!)
+    }
+    
+    func renderStudentLocationsInTable() {
+        
+        ParseClient.sharedInstance().getStudentLocations() { locations, error in
+            if let locations = locations {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.locations = locations
+                    self.tableView.reloadData()
+                }
+            } else {
+                print(error)
+                let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+                    // Do nothing
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        
     }
 }
