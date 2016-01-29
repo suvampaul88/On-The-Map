@@ -23,6 +23,7 @@
 		B1637DE01C52E81D00E30B0F /* StudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1637DDF1C52E81D00E30B0F /* StudentLocations.swift */; };
 		B1637DE21C53B8EE00E30B0F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1637DE11C53B8EE00E30B0F /* MapViewController.swift */; };
 		B1637E1E1C56D5EF00E30B0F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1637E1D1C56D5EF00E30B0F /* TableViewController.swift */; };
+		B1637E201C5C1A6D00E30B0F /* SubmitStudentInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1637E1F1C5C1A6D00E30B0F /* SubmitStudentInformationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		B1637DDF1C52E81D00E30B0F /* StudentLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocations.swift; sourceTree = "<group>"; };
 		B1637DE11C53B8EE00E30B0F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B1637E1D1C56D5EF00E30B0F /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		B1637E1F1C5C1A6D00E30B0F /* SubmitStudentInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitStudentInformationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 				B100D3AC1C3B29CC0074D936 /* LoginViewController.swift */,
 				B1637DE11C53B8EE00E30B0F /* MapViewController.swift */,
 				B1637E1D1C56D5EF00E30B0F /* TableViewController.swift */,
+				B1637E1F1C5C1A6D00E30B0F /* SubmitStudentInformationController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				B100D3E41C3DFE800074D936 /* UdacityConstants.swift in Sources */,
 				B1637E1E1C56D5EF00E30B0F /* TableViewController.swift in Sources */,
 				B1637DDE1C50440700E30B0F /* ParseConstants.swift in Sources */,
+				B1637E201C5C1A6D00E30B0F /* SubmitStudentInformationController.swift in Sources */,
 				B100D3AD1C3B29CC0074D936 /* LoginViewController.swift in Sources */,
 				B100D3AB1C3B29CC0074D936 /* AppDelegate.swift in Sources */,
 				B100D3E61C3DFEAC0074D936 /* UdacityConvenience.swift in Sources */,

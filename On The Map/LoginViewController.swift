@@ -50,14 +50,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     
                     self.presentAlertNSError(errorString)
-                    
+                    print(errorString)
+            
                 }
-                
             }
             
         }
     }
-    
+            
+
     
     
     @IBAction func signupUdacity(sender: AnyObject) {
