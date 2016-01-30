@@ -45,12 +45,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if success {
                     
                     self.completeLogin()
-                    print(errorString)
                     
                 } else {
                     
                     self.presentAlertNSError(errorString)
-                    print(errorString)
             
                 }
             }

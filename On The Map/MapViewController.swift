@@ -30,17 +30,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.delegate = self
         
-//        ParseClient.sharedInstance().getStudentLocations() { locations, error in
-//            if let locations = locations {
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    self.locations = locations
-//                    self.mapView.reloadInputViews()
-//                    self.setLocationsOnMap()
-//                }
-//            } else {
-//                print(error)
-//            }
-//        }
         getLocationsForMap()
         
     }
@@ -53,14 +42,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     self.locations = locations
                     self.mapView.reloadInputViews()
                     self.setLocationsOnMap()
+                    
                 }
             } else {
                 print(error)
-                let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-                    // Do nothing
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.showAlertFailure(error)
             }
         }
 
@@ -112,9 +98,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func refreshMapView(sender: AnyObject) {
-        
+        getLocationsForMap()
     }
 
+    
+    
+    func showAlertFailure(error: NSError?) {
+        let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+            // Do nothing
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     
     func displayError(errorString: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {

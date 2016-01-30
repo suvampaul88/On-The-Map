@@ -22,16 +22,6 @@ class TableViewController: UITableViewController {
         
         tableView.delegate = self
         
-//        ParseClient.sharedInstance().getStudentLocations() { locations, error in
-//            if let locations = locations {
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    self.locations = locations
-//                    self.tableView.reloadData()
-//                }
-//            } else {
-//                print(error)
-//            }
-//        }
         renderStudentLocationsInTable()
         
     }
@@ -52,6 +42,16 @@ class TableViewController: UITableViewController {
     
     @IBAction func refreshStudentLocationsData(sender: AnyObject) {
         renderStudentLocationsInTable()
+    }
+    
+    
+    
+    func showAlertFailure(error: NSError?) {
+        let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+            // Do nothing
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     
@@ -96,11 +96,7 @@ class TableViewController: UITableViewController {
                 }
             } else {
                 print(error)
-                let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-                    // Do nothing
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.showAlertFailure(error)
             }
         }
         
