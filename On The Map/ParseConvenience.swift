@@ -40,33 +40,30 @@ extension ParseClient {
     }
 
     
-//    // MARK: POST Convenience Methods
-//    func postStudentLocations(completionHandler: (Success: Bool, createdAT: String?, error: NSError?) -> Void)  {
-//        
-//        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
-//        let jsonBody : [String:AnyObject] = [UdacityClient.JSONBodyKeys.Domain: userinfo]
-//        
-////        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Cupertino, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.322998, \"longitude\": -122.032182}".dataUsingEncoding(NSUTF8StringEncoding)
-//        
-//        
-//        /* 2. Make the request */
-//        taskForPOSTMethod(UdacityClient.Methods.Session, parameters: nil, jsonBody: jsonBody) { JSONResult, error in
-//            
-//            /* 3. Send the desired value(s) to completion handler */
-//            if let error = error {
-//                completionHandler(Success: false, userID: nil, error: error)
-//            } else {
-//                if let results = JSONResult[UdacityClient.JSONResponseKeys.Account] as? [String: AnyObject] {
-//                    let userID = results[UdacityClient.JSONResponseKeys.UserKey] as? String
-//                    completionHandler(Success: true, userID: userID, error: nil)
-//                    print(userID)
-//                } else {
-//                    completionHandler(Success: false, userID: nil, error: NSError(domain: "Login parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse loginThroughUdacity"]))
-//                }
-//            }
-//        }
-//    }
-//    
+    // MARK: POST Convenience Methods
+    func postStudentLocations(mapString: String, mediaURL: String, latitude: Double, longitude: Double, completionHandler: (Success: Bool, createdAt: String?, error: NSError?) -> Void)  {
+        
+        /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        let jsonBody : [String:AnyObject] = [ParseClient.JSONBodyKeys.UniqueKey: UdacityClient.sharedInstance().userID!, ParseClient.JSONBodyKeys.FirstName: UdacityClient.sharedInstance().firstName!, ParseClient.JSONBodyKeys.LastName: UdacityClient.sharedInstance().lastName!, ParseClient.JSONBodyKeys.MapString: mapString, ParseClient.JSONBodyKeys.MediaURL: mediaURL, ParseClient.JSONBodyKeys.Latitude: latitude, ParseClient.JSONBodyKeys.Longitude: longitude]
+
+    
+        /* 2. Make the request */
+        taskForPOSTMethod(ParseClient.Methods.StudentLocation, parameters: nil, jsonBody: jsonBody) { JSONResult, error in
+            
+            /* 3. Send the desired value(s) to completion handler */
+            if let error = error {
+                completionHandler(Success: false, createdAt: nil, error: error)
+            } else {
+                if let createdAt = JSONResult[ParseClient.JSONResponseKeys.CreatedAt] as? String {
+                    completionHandler(Success: true, createdAt: createdAt, error: nil)
+                    print(createdAt)
+                } else {
+                    completionHandler(Success: false, createdAt: nil, error: NSError(domain: "postStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postStudentLocations"]))
+                }
+            }
+        }
+    }
+    
 
 
 
