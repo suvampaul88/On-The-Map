@@ -51,6 +51,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.presentAlertNSError(errorString)
             
                 }
+                
             }
             
         }
@@ -63,6 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let app = UIApplication.sharedApplication()
         app.openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
     }
+
     
     
     func completeLogin() {
@@ -71,6 +73,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.presentViewController(controller, animated: true, completion: nil)
         })
     }
+    
     
     
     func presentAlertNSError(errorString: NSError?) {

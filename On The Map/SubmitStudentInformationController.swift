@@ -95,7 +95,7 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
                     
                     if success {
                         
-                        print(createdAt)
+                        print("Locatin posted at \(createdAt!)")
                         self.dismissViewControllerAnimated(true, completion: nil)
                         
                     } else {

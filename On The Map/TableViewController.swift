@@ -13,9 +13,7 @@ class TableViewController: UITableViewController {
     
     
     @IBOutlet weak var loutoutButton: UIBarButtonItem!
-    
-    var locations: [StudentLocations] = [StudentLocations]()
-    
+        
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -65,13 +63,13 @@ class TableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+        return StudentInfo.locations.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("studentLocationTableViewCell") as UITableViewCell!
-        let location = locations[indexPath.row]
+        let location =  StudentInfo.locations[indexPath.row]
         
         cell.textLabel?.text = "\(location.firstName) \(location.lastName)"
         cell.imageView?.image = UIImage(named: "Pin")
@@ -82,7 +80,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let app = UIApplication.sharedApplication()
-        let toOpen = locations[indexPath.row].mediaURL
+        let toOpen = StudentInfo.locations[indexPath.row].mediaURL
             app.openURL(NSURL(string:toOpen)!)
     }
     
@@ -91,7 +89,7 @@ class TableViewController: UITableViewController {
         ParseClient.sharedInstance().getStudentLocations() { locations, error in
             if let locations = locations {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.locations = locations
+                    StudentInfo.locations = locations
                     self.tableView.reloadData()
                 }
             } else {

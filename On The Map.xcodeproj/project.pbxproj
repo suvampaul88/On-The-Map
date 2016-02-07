@@ -24,6 +24,7 @@
 		B1637DE21C53B8EE00E30B0F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1637DE11C53B8EE00E30B0F /* MapViewController.swift */; };
 		B1637E1E1C56D5EF00E30B0F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1637E1D1C56D5EF00E30B0F /* TableViewController.swift */; };
 		B1637E201C5C1A6D00E30B0F /* SubmitStudentInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1637E1F1C5C1A6D00E30B0F /* SubmitStudentInformationController.swift */; };
+		B17049321C62B56E00103559 /* StudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17049311C62B56E00103559 /* StudentInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		B1637DE11C53B8EE00E30B0F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B1637E1D1C56D5EF00E30B0F /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B1637E1F1C5C1A6D00E30B0F /* SubmitStudentInformationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitStudentInformationController.swift; sourceTree = "<group>"; };
+		B17049311C62B56E00103559 /* StudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				B1637DD81C5043AC00E30B0F /* Parse */,
 				B100D3E01C3DFE270074D936 /* Udacity */,
 				B100D3AA1C3B29CC0074D936 /* AppDelegate.swift */,
+				B17049311C62B56E00103559 /* StudentInfo.swift */,
 				B100D3B11C3B29CC0074D936 /* Assets.xcassets */,
 				B100D3B31C3B29CC0074D936 /* LaunchScreen.storyboard */,
 				B100D3B61C3B29CC0074D936 /* Info.plist */,
@@ -320,6 +323,7 @@
 				B1637DDE1C50440700E30B0F /* ParseConstants.swift in Sources */,
 				B1637E201C5C1A6D00E30B0F /* SubmitStudentInformationController.swift in Sources */,
 				B100D3AD1C3B29CC0074D936 /* LoginViewController.swift in Sources */,
+				B17049321C62B56E00103559 /* StudentInfo.swift in Sources */,
 				B100D3AB1C3B29CC0074D936 /* AppDelegate.swift in Sources */,
 				B100D3E61C3DFEAC0074D936 /* UdacityConvenience.swift in Sources */,
 			);

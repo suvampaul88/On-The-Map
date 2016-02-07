@@ -24,7 +24,7 @@ struct StudentLocations {
 
     // MARK: Initializers
     
-    /* Construct a TMDBMovie from a dictionary */
+    /* Construct a database from a dictionary */
     init(dictionary: [String : AnyObject]) {
         
         objectID = dictionary[ParseClient.JSONResponseKeys.ObjectId] as! String

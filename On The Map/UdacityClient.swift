@@ -18,11 +18,6 @@ class UdacityClient : NSObject {
     var session: NSURLSession
     
     
-    /* Authentication state */
-    var lastName : String? = nil
-    var firstName : String? = nil
-    var userID : String? = nil
-    
     // MARK: Initializers
     
     override init() {

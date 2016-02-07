@@ -19,12 +19,15 @@ extension UdacityClient {
                 
                 if let userID = userID {
                     
-                    self.userID = userID
+                    StudentInfo.userID = userID
+        
                     self.getPublicUserData() {(success, firstName, lastName, error) in
                         
                         if success {
-                            self.firstName = firstName
-                            self.lastName = lastName
+                            
+                            StudentInfo.firstName = firstName!
+                            StudentInfo.lastName = lastName!
+                        
                         } else {
                             completionHandler(success: success, errorString: error)
                         }
@@ -48,7 +51,6 @@ extension UdacityClient {
         let userinfo : [String: String] =  [UdacityClient.JSONBodyKeys.Username : username, UdacityClient.JSONBodyKeys.Password : password]
         let jsonBody : [String:AnyObject] = [UdacityClient.JSONBodyKeys.Domain: userinfo]
         
-//        let jsonBody : [String: AnyObject] = ["udacity": ["username": "\(username)", "password": "\(password)"]]
 
         /* 2. Make the request */
         taskForPOSTMethod(UdacityClient.Methods.Session, parameters: nil, jsonBody: jsonBody) { JSONResult, error in
@@ -99,7 +101,7 @@ extension UdacityClient {
         
         /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
         var mutableMethod : String = UdacityClient.Methods.Users
-        mutableMethod = UdacityClient.subtituteKeyInMethod(mutableMethod, key: UdacityClient.URLKeys.UserID, value: String(UdacityClient.sharedInstance().userID!))!
+        mutableMethod = UdacityClient.subtituteKeyInMethod(mutableMethod, key: UdacityClient.URLKeys.UserID, value: String(StudentInfo.userID))!
         
         /* 2. Make the request */
         taskForGETMethod(mutableMethod, parameters: nil) { JSONResult, error in

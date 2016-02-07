@@ -44,7 +44,7 @@ extension ParseClient {
     func postStudentLocations(mapString: String, mediaURL: String, latitude: Double, longitude: Double, completionHandler: (Success: Bool, createdAt: String?, error: NSError?) -> Void)  {
         
         /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
-        let jsonBody : [String:AnyObject] = [ParseClient.JSONBodyKeys.UniqueKey: UdacityClient.sharedInstance().userID!, ParseClient.JSONBodyKeys.FirstName: UdacityClient.sharedInstance().firstName!, ParseClient.JSONBodyKeys.LastName: UdacityClient.sharedInstance().lastName!, ParseClient.JSONBodyKeys.MapString: mapString, ParseClient.JSONBodyKeys.MediaURL: mediaURL, ParseClient.JSONBodyKeys.Latitude: latitude, ParseClient.JSONBodyKeys.Longitude: longitude]
+        let jsonBody : [String:AnyObject] = [ParseClient.JSONBodyKeys.UniqueKey: StudentInfo.userID, ParseClient.JSONBodyKeys.FirstName: StudentInfo.firstName, ParseClient.JSONBodyKeys.LastName: StudentInfo.lastName, ParseClient.JSONBodyKeys.MapString: mapString, ParseClient.JSONBodyKeys.MediaURL: mediaURL, ParseClient.JSONBodyKeys.Latitude: latitude, ParseClient.JSONBodyKeys.Longitude: longitude]
 
     
         /* 2. Make the request */
@@ -56,7 +56,6 @@ extension ParseClient {
             } else {
                 if let createdAt = JSONResult[ParseClient.JSONResponseKeys.CreatedAt] as? String {
                     completionHandler(Success: true, createdAt: createdAt, error: nil)
-                    print(createdAt)
                 } else {
                     completionHandler(Success: false, createdAt: nil, error: NSError(domain: "postStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postStudentLocations"]))
                 }

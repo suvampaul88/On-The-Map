@@ -20,7 +20,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
 
-    var locations: [StudentLocations] = [StudentLocations]()
     var annotations = [MKPointAnnotation]()
     
 
@@ -39,7 +38,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         ParseClient.sharedInstance().getStudentLocations() { locations, error in
             if let locations = locations {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.locations = locations
+                    StudentInfo.locations = locations
                     self.mapView.reloadInputViews()
                     self.setLocationsOnMap()
                     
@@ -56,7 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         var annotations = [MKPointAnnotation]()
         
-        for location in locations {
+        for location in StudentInfo.locations {
             
             let lat = CLLocationDegrees(location.latitude as Float)
             let long = CLLocationDegrees(location.longitude as Float)
