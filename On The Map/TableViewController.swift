@@ -86,7 +86,7 @@ class TableViewController: UITableViewController {
     
     func renderStudentLocationsInTable() {
         
-        ParseClient.sharedInstance().getStudentLocations() { locations, error in
+        ParseClient.sharedInstance().getStudentLocations() { success, locations, error in
             if let locations = locations {
                 dispatch_async(dispatch_get_main_queue()) {
                     StudentInfo.locations = locations
