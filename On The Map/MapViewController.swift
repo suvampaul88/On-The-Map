@@ -34,56 +34,57 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
+    
+//    func getLocationsForMap () {
+//        
+//        ParseClient.sharedInstance().getStudentLocations() { success, locations, error in
+//            
+//            if success {
+//                StudentInfo.locations = locations!
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    self.setLocationsOnMap()
+//                }
+//            }
+//        
+//        else {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    let alert = UIAlertController(title: "Download failed", message: "Unable to get student locations", preferredStyle: UIAlertControllerStyle.Alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+//                        // Do nothing
+//                    }))
+//                    self.presentViewController(alert, animated: true, completion: nil)
+//                }
+// 
+//            }
+//        }
+//
+//    }
+    
+    
+    
+    
     func getLocationsForMap () {
         ParseClient.sharedInstance().getStudentLocations() { success, locations, error in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()) {
-                    let alert = UIAlertController(title: "Failed to get student locations data", message: "OK", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Download Failed", message: "Unable to get student locations", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
                         // Do nothing
                     }))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             } else {
-                StudentInfo.locations = locations!
                 dispatch_async(dispatch_get_main_queue()) {
+                    StudentInfo.locations = locations!
+                    self.mapView.reloadInputViews()
                     self.setLocationsOnMap()
                 }
-
+                
             }
-            
-            
-//            if success {
-//                StudentInfo.locations = locations!
-////                self.mapView.reloadInputViews()
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    self.setLocationsOnMap()
-//                }
-//            }
-////            if let locations = locations {
-////                dispatch_async(dispatch_get_main_queue()) {
-////                    StudentInfo.locations = locations
-////                    self.mapView.reloadInputViews()
-////                    self.setLocationsOnMap()
-////                    
-////                }
-////            }
-//        
-//        else {
-////                print(error)
-////                self.showAlertFailure(error)
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-//                        // Do nothing
-//                    }))
-//                    self.presentViewController(alert, animated: true, completion: nil)
-//                }
-//                
-//            }
         }
-
+        
     }
+    
     
     func setLocationsOnMap () {
         
@@ -135,14 +136,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     
-    
-    func showAlertFailure(error: NSError?) {
-        let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-            // Do nothing
-        }))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
     
     
     func displayError(errorString: NSError?) {

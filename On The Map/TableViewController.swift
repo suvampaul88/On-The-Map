@@ -84,17 +84,22 @@ class TableViewController: UITableViewController {
             app.openURL(NSURL(string:toOpen)!)
     }
     
+    
     func renderStudentLocationsInTable() {
         
         ParseClient.sharedInstance().getStudentLocations() { success, locations, error in
-            if let locations = locations {
+            if error != nil {
                 dispatch_async(dispatch_get_main_queue()) {
-                    StudentInfo.locations = locations
-                    self.tableView.reloadData()
+                    let alert = UIAlertController(title: "Download Failed", message: "Unable to get student locations", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+                        // Do nothing
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             } else {
-                print(error)
-                self.showAlertFailure(error)
+                    StudentInfo.locations = locations!
+                    self.tableView.reloadData()
+
             }
         }
         
