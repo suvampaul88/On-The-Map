@@ -97,11 +97,15 @@ class TableViewController: UITableViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             } else {
-                    StudentInfo.locations = locations!
-                    self.tableView.reloadData()
 
+                    StudentInfo.locations = locations!.sort({ $0.createdAt.compare($1.createdAt) == .OrderedDescending })
+                    self.tableView.reloadData()
+                
+                
+                
             }
         }
         
     }
 }
+

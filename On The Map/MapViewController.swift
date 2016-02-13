@@ -35,34 +35,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
     
-//    func getLocationsForMap () {
-//        
-//        ParseClient.sharedInstance().getStudentLocations() { success, locations, error in
-//            
-//            if success {
-//                StudentInfo.locations = locations!
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    self.setLocationsOnMap()
-//                }
-//            }
-//        
-//        else {
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    let alert = UIAlertController(title: "Download failed", message: "Unable to get student locations", preferredStyle: UIAlertControllerStyle.Alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-//                        // Do nothing
-//                    }))
-//                    self.presentViewController(alert, animated: true, completion: nil)
-//                }
-// 
-//            }
-//        }
-//
-//    }
-    
-    
-    
-    
     func getLocationsForMap () {
         ParseClient.sharedInstance().getStudentLocations() { success, locations, error in
             if error != nil {

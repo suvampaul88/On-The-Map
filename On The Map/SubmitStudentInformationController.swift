@@ -19,6 +19,8 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var findOnTheMap: UIButton!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     var coordinates = CLLocationCoordinate2D()
@@ -33,6 +35,7 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
         enterURL.hidden = true
         submitButton.hidden = true
         mapView.hidden = true
+        activityIndicator.hidden = true
         
         whereAreYouStudying.text = "Where Are You Studing Today?"
         enterYorLocation.text = "Enter Your Location Here"
@@ -41,40 +44,56 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
     
     @IBAction func findOnTheMapTask(sender: AnyObject) {
 
-        let forwardGeoCode = CLGeocoder()
-
-        forwardGeoCode.geocodeAddressString(enterYorLocation.text!, completionHandler: {location, error -> Void in
-            if error != nil {
-                let alert = UIAlertController(title: "Failed to find location", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-                    // Do nothing
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
+        if enterYorLocation.text!.isEmpty {
+            let alert = UIAlertController(title: "Failed to find location", message: "Enter a valid location", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+                // Do nothing
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        
+        }
+           
+            let forwardGeoCode = CLGeocoder()
             
-            if let location = location?.first {
+            forwardGeoCode.geocodeAddressString(enterYorLocation.text!, completionHandler: {location, error -> Void in
                 
-                self.whereAreYouStudying.hidden = true
-                self.enterYorLocation.hidden = true
-                self.findOnTheMap.hidden = true
-                
-                self.mapView.hidden = false
-                self.enterURL.hidden = false
-                self.submitButton.hidden = false
-                
-                self.enterURL.text = "Enter your URL and submit"
-                
-                self.coordinates = location.location!.coordinate
+                if error != nil {
+                    let alert = UIAlertController(title: "Failed to find location", message: "Please enter a new location or enter your location again", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+                        // Do nothing
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    
+                    self.activityIndicator.hidden = false
+                    self.activityIndicator.startAnimating()
 
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = self.coordinates
-                self.mapView.addAnnotation(annotation)
-                self.mapView.centerCoordinate = annotation.coordinate
+                    if let location = location?.first {
+                        
+                        self.whereAreYouStudying.hidden = true
+                        self.enterYorLocation.hidden = true
+                        self.findOnTheMap.hidden = true
+                        
+                        self.mapView.hidden = false
+                        self.enterURL.hidden = false
+                        self.submitButton.hidden = false
+                        
+                        self.enterURL.text = "Enter your URL and submit"
+                        
+                        self.coordinates = location.location!.coordinate
+                        
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = self.coordinates
+                        self.mapView.addAnnotation(annotation)
+                        self.mapView.centerCoordinate = annotation.coordinate
+                        
+                    }
+                    
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidden = true
+                }
                 
-            }
-
-        })
-
+            })
     }
 
     
@@ -82,7 +101,7 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
         
         if self.enterURL.text! == "" {
             
-            let alert = UIAlertController(title: "URL Empty", message: "Please Enter A Valid URL", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "URL Empty", message: "please enter a valid URL", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
                 // Do nothing
             }))
@@ -93,18 +112,30 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
             ParseClient.sharedInstance().postStudentLocations(self.enterYorLocation.text!, mediaURL: self.enterURL.text!, latitude:
                 self.coordinates.latitude, longitude: self.coordinates.longitude) {(success, createdAt, error) in
                     
-                    if success {
+                    if error != nil {
                         
-                        print("Location posted at \(createdAt!)")
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        let alert = UIAlertController(title: "Failed to post location", message: "Please try again", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+                            // Do nothing
+                        }))
+                        self.presentViewController(alert, animated: true, completion: nil)
                         
                     } else {
-                        self.displayError(error)
+                     
+                        print("Location posted at \(createdAt!)")
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    
                     }
             }
             
         }
     
+    }
+    
+    
+    @IBAction func cancel(sender: AnyObject) {
+    
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     

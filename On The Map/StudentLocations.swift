@@ -20,6 +20,7 @@ struct StudentLocations {
     var mediaURL = ""
     var latitude: Float = 0
     var longitude: Float = 0
+    var createdAt = ""
 
 
     // MARK: Initializers
@@ -35,6 +36,7 @@ struct StudentLocations {
         mediaURL = dictionary[ParseClient.JSONResponseKeys.MediaURL] as! String
         latitude = dictionary[ParseClient.JSONResponseKeys.Latitude] as! Float
         longitude = dictionary[ParseClient.JSONResponseKeys.Longitude] as! Float
+        createdAt = dictionary[ParseClient.JSONResponseKeys.CreatedAt] as! String
         
     }
     

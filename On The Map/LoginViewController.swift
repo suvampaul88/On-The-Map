@@ -10,9 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
-//https://discussions.udacity.com/t/question-about-network-connectivity-during-login/38194
-//    error.localizedDescription
-
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
