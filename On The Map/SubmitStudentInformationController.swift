@@ -51,23 +51,25 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
             }))
             self.presentViewController(alert, animated: true, completion: nil)
         
-        }
-           
+        } else {
+            
+            self.activityIndicator.hidden = false
+            self.activityIndicator.startAnimating()
+            
             let forwardGeoCode = CLGeocoder()
             
             forwardGeoCode.geocodeAddressString(enterYorLocation.text!, completionHandler: {location, error -> Void in
                 
                 if error != nil {
-                    let alert = UIAlertController(title: "Failed to find location", message: "Please enter a new location or enter your location again", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-                        // Do nothing
-                    }))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let alert = UIAlertController(title: "Failed to find location", message: "Please enter a new location or enter your location again", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+                            // Do nothing
+                        }))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
                 } else {
                     
-                    self.activityIndicator.hidden = false
-                    self.activityIndicator.startAnimating()
-
                     if let location = location?.first {
                         
                         self.whereAreYouStudying.hidden = true
@@ -89,11 +91,13 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
                         
                     }
                     
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.hidden = true
                 }
                 
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidden = true
+
             })
+        }
     }
 
     
