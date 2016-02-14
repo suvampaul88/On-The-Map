@@ -97,15 +97,19 @@ class TableViewController: UITableViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             } else {
-
-                    StudentInfo.locations = locations!.sort({ $0.createdAt.compare($1.createdAt) == .OrderedDescending })
-                    self.tableView.reloadData()
                 
-                
-                
+                StudentInfo.locations = locations!.sort({ self.stringToDate($0.createdAt).compare(self.stringToDate($1.createdAt)) == .OrderedDescending})
+                self.tableView.reloadData()
             }
         }
         
+    }
+    
+    func stringToDate(stringDate:String) -> NSDate {
+      
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return dateFormatter.dateFromString(stringDate)!
     }
 }
 
