@@ -43,16 +43,6 @@ class TableViewController: UITableViewController {
     }
     
     
-    
-    func showAlertFailure(error: NSError?) {
-        let alert = UIAlertController(title: "Failed to get student locations data", message: error?.description, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-            // Do nothing
-        }))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    
     func displayError(errorString: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let errorString = errorString {
@@ -89,6 +79,7 @@ class TableViewController: UITableViewController {
         
         ParseClient.sharedInstance().getStudentLocations() { success, locations, error in
             if error != nil {
+                
                 dispatch_async(dispatch_get_main_queue()) {
                     let alert = UIAlertController(title: "Download Failed", message: "Unable to get student locations", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
@@ -96,6 +87,7 @@ class TableViewController: UITableViewController {
                     }))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
+            
             } else {
                 
                 StudentInfo.locations = locations!.sort({ self.stringToDate($0.createdAt).compare(self.stringToDate($1.createdAt)) == .OrderedDescending})
@@ -105,6 +97,7 @@ class TableViewController: UITableViewController {
         
     }
     
+
     func stringToDate(stringDate:String) -> NSDate {
       
         let dateFormatter = NSDateFormatter()

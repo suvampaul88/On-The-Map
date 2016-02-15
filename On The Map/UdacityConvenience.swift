@@ -11,7 +11,7 @@ import Foundation
 extension UdacityClient {
     
     
-    func authenticateWithUdacityServer(username: String, password: String, completionHandler: (success: Bool, errorString: NSError?) -> Void) {
+    func authenticateWithUdacityServer(username: String, password: String, completionHandler: (success: Bool, error: NSError?) -> Void) {
         
         self.loginThroughUdacity(username, password: password) { (success, userID, error) in
             
@@ -29,13 +29,13 @@ extension UdacityClient {
                             StudentInfo.lastName = lastName!
                         
                         } else {
-                            completionHandler(success: success, errorString: error)
+                            completionHandler(success: success, error: error)
                         }
                     }
-                    completionHandler(success: success, errorString: error)
+                    completionHandler(success: success, error: error)
                 }
             } else {
-                completionHandler(success: success, errorString: error)
+                completionHandler(success: success, error: error)
             }
             
         }

@@ -40,7 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         } else {
             
-            UdacityClient.sharedInstance().authenticateWithUdacityServer(self.emailTextField!.text!, password: self.passwordTextField!.text!) {(success, errorString) in
+            UdacityClient.sharedInstance().authenticateWithUdacityServer(self.emailTextField!.text!, password: self.passwordTextField!.text!) {(success, error) in
                 
                 if success {
                     
@@ -48,16 +48,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                 } else {
                     
-                    self.presentAlertNSError(errorString)
-            
+                    self.presentAlertString("Unable to complete login")
                 }
                 
             }
             
         }
     }
-            
-
     
     
     @IBAction func signupUdacity(sender: AnyObject) {
@@ -68,24 +65,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     func completeLogin() {
-        dispatch_async(dispatch_get_main_queue(), {
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-            self.presentViewController(controller, animated: true, completion: nil)
-        })
-    }
-    
-    
-    
-    func presentAlertNSError(errorString: NSError?) {
         
-        dispatch_async(dispatch_get_main_queue()) {
-            let alert = UIAlertController(title: "Udacity login failed", message: errorString?.description, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-                // Do nothing
-            }))
-            self.presentViewController(alert, animated: true, completion: nil)
+        if StudentInfo.userID == "" {
+            
+            self.presentAlertString("Login attempt failed- please try again")
+            
+        } else {
+
+            dispatch_async(dispatch_get_main_queue(), {
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+                self.presentViewController(controller, animated: true, completion: nil)
+            })
+
         }
+        
     }
+    
+    
     
     
     func presentAlertString(errorString: String?) {
