@@ -44,7 +44,7 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
     
     @IBAction func findOnTheMapTask(sender: AnyObject) {
 
-        if enterYorLocation.text!.isEmpty {
+        if enterYorLocation.text == "" {
             let alert = UIAlertController(title: "Failed to find location", message: "Enter a valid location", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
                 // Do nothing
@@ -103,7 +103,7 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
     
     @IBAction func submitInfoTask(sender: AnyObject) {
         
-        if self.enterURL.text! == "" {
+        if enterURL.text! == "" {
             
             let alert = UIAlertController(title: "URL Empty", message: "please enter a valid URL", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
@@ -116,20 +116,34 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
             ParseClient.sharedInstance().postStudentLocations(self.enterYorLocation.text!, mediaURL: self.enterURL.text!, latitude:
                 self.coordinates.latitude, longitude: self.coordinates.longitude) {(success, createdAt, error) in
                     
-                    if error != nil {
-                        
-                        let alert = UIAlertController(title: "Failed to post location", message: "Please try again", preferredStyle: UIAlertControllerStyle.Alert)
+                    if success {
+                      
+                        print("Location posted at \(createdAt!)")
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    
+                    } else {
+                        let alert = UIAlertController(title: "Failed to post location", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
                             // Do nothing
                         }))
                         self.presentViewController(alert, animated: true, completion: nil)
-                        
-                    } else {
-                     
-                        print("Location posted at \(createdAt!)")
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                    
+
                     }
+                    
+//                    if error != nil {
+//                        
+//                        let alert = UIAlertController(title: "Failed to post location", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+//                            // Do nothing
+//                        }))
+//                        self.presentViewController(alert, animated: true, completion: nil)
+//                        
+//                    } else {
+//                     
+//                        print("Location posted at \(createdAt!)")
+//                        self.dismissViewControllerAnimated(true, completion: nil)
+//                    
+//                    }
             }
             
         }

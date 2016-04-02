@@ -32,13 +32,14 @@ class UdacityClient : NSObject {
     // Not sure about best method: should I have parameter or not?
 
     
-    func taskForGETMethod(method: String, parameters: [String : AnyObject]?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForGETMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         /* 1. Set the parameters */
-        // There are none...
+        let parameters = [String:AnyObject]()
+
         
         /* 2/3. Build the URL and configure the request */
-        let urlString = UdacityClient.Constants.BaseURLSecure + method
+        let urlString = UdacityClient.Constants.BaseURLSecure + method + UdacityClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)
         
@@ -48,6 +49,7 @@ class UdacityClient : NSObject {
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
+                completionHandler(result: nil, error: error )
                 return
             }
             
@@ -87,13 +89,14 @@ class UdacityClient : NSObject {
     
     // MARK: POST
     
-    func taskForPOSTMethod(method: String, parameters: [String : AnyObject]?, jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(method: String, parameters: [String : AnyObject], jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         /* 1. Set the parameters */
-        //There are none 
+        let parameters = [String:AnyObject]()
+
         
         /* 2/3. Build the URL and configure the request */
-        let urlString = Constants.BaseURLSecure + method
+        let urlString = Constants.BaseURLSecure + method + UdacityClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
@@ -108,7 +111,8 @@ class UdacityClient : NSObject {
             
             /* GUARD: Was there an error? */
             guard (error == nil) else {
-                print("There was an error with your request: \(error)")
+                print("There was an error with your request: \(error!)")
+                completionHandler(result: nil, error: error )
                 return
             }
             
@@ -130,7 +134,6 @@ class UdacityClient : NSObject {
                 return
             }
             
-            
             let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
@@ -149,13 +152,14 @@ class UdacityClient : NSObject {
     //MARK: DELETE
     
     
-    func taskForDELETEMethod(method: String, parameters: [String : AnyObject]?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForDELETEMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         /* 1. Set the parameters */
-        //There are none
+        let parameters = [String:AnyObject]()
+
         
         /* 2/3. Build the URL and configure the request */
-        let urlString = Constants.BaseURLSecure + method
+        let urlString = Constants.BaseURLSecure + method + UdacityClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
 
@@ -179,6 +183,7 @@ class UdacityClient : NSObject {
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
+                completionHandler(result: nil, error: error )
                 return
             }
             

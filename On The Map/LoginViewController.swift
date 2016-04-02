@@ -27,34 +27,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     
     @IBAction func loginButtonTouch(sender: AnyObject) {
+
+        if emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
+            self.presentAlertString("Please enter valid e-mail or password")
+        }
         
-        
-        
-        if emailTextField.text!.isEmpty {
-            
-            self.presentAlertString("Email is Empty or Invalid")
-            
-        } else if passwordTextField.text!.isEmpty {
-            
-            self.presentAlertString("Password is Empty or Invalid")
-            
-        } else {
-            
-            UdacityClient.sharedInstance().authenticateWithUdacityServer(self.emailTextField!.text!, password: self.passwordTextField!.text!) {(success, error) in
+        if !emailTextField.text!.isEmpty && !passwordTextField.text!.isEmpty {
+            UdacityClient.sharedInstance().authenticateWithUdacityServer(self.emailTextField!.text!, password: self.passwordTextField!.text!)
+            {(success, error) in
+                
                 
                 if success {
-                    
+                   
                     self.completeLogin()
-                    
-                } else {
-                    
-                    self.presentAlertString("Unable to complete login")
-                }
                 
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let alert = UIAlertController(title: "Udacity login failed", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
+                            // Do nothing
+                        }))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                }
             }
-            
         }
     }
+    
     
     
     @IBAction func signupUdacity(sender: AnyObject) {

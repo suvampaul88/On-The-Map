@@ -81,7 +81,7 @@ class TableViewController: UITableViewController {
             if error != nil {
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    let alert = UIAlertController(title: "Download Failed", message: "Unable to get student locations", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Download Failed", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
                         // Do nothing
                     }))
@@ -90,7 +90,8 @@ class TableViewController: UITableViewController {
             
             } else {
                 
-                StudentInfo.locations = locations!.sort({ self.stringToDate($0.createdAt).compare(self.stringToDate($1.createdAt)) == .OrderedDescending})
+                StudentInfo.locations = locations!
+//                StudentInfo.locations = locations!.sort({ self.stringToDate($0.createdAt).compare(self.stringToDate($1.createdAt)) == .OrderedDescending})
                 self.tableView.reloadData()
             }
         }

@@ -48,12 +48,14 @@ extension UdacityClient {
     func loginThroughUdacity(username: String, password: String, completionHandler: (Success: Bool, userID: String?, error: NSError?) -> Void)  {
         
         /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        let parameters = [String:AnyObject]()
+        
         let userinfo : [String: String] =  [UdacityClient.JSONBodyKeys.Username : username, UdacityClient.JSONBodyKeys.Password : password]
         let jsonBody : [String:AnyObject] = [UdacityClient.JSONBodyKeys.Domain: userinfo]
         
 
         /* 2. Make the request */
-        taskForPOSTMethod(UdacityClient.Methods.Session, parameters: nil, jsonBody: jsonBody) { JSONResult, error in
+        taskForPOSTMethod(UdacityClient.Methods.Session, parameters: parameters, jsonBody: jsonBody) { JSONResult, error in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
@@ -75,11 +77,11 @@ extension UdacityClient {
         
         
         /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
-        //There are none
+        let parameters = [String:AnyObject]()
 
         
         /* 2. Make the request */
-        taskForDELETEMethod(UdacityClient.Methods.Session, parameters: nil) { JSONResult, error in
+        taskForDELETEMethod(UdacityClient.Methods.Session, parameters: parameters) { JSONResult, error in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {
@@ -100,11 +102,13 @@ extension UdacityClient {
     func getPublicUserData(completionHandler: (success: Bool, firstName: String?, lastName: String?, error: NSError?) -> Void) {
         
         /* 1. Specify parameters, method (if has {key}), and HTTP body (if POST) */
+        let parameters = [String:AnyObject]()
+
         var mutableMethod : String = UdacityClient.Methods.Users
         mutableMethod = UdacityClient.subtituteKeyInMethod(mutableMethod, key: UdacityClient.URLKeys.UserID, value: String(StudentInfo.userID))!
         
         /* 2. Make the request */
-        taskForGETMethod(mutableMethod, parameters: nil) { JSONResult, error in
+        taskForGETMethod(mutableMethod, parameters: parameters) { JSONResult, error in
             
             /* 3. Send the desired value(s) to completion handler */
             if let error = error {

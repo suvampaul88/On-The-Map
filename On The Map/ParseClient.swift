@@ -32,13 +32,14 @@ class ParseClient : NSObject {
     // Not sure about best method: should I have parameter or not?
     
     
-    func taskForGETMethod(method: String, parameters: [String : AnyObject]?, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForGETMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         /* 1. Set the parameters */
         //There are none
+        let parameters = [String : AnyObject]()
         
         /* 2/3. Build the URL and configure the request */
-        let urlString = ParseClient.Constants.BaseURLSecure + method + ParseClient.escapedParameters(parameters!)
+        let urlString = ParseClient.Constants.BaseURLSecure + method + ParseClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         request.addValue("\(ParseClient.Constants.ParseApplicationID)", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -51,6 +52,7 @@ class ParseClient : NSObject {
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
+                completionHandler(result: nil, error: error)
                 return
             }
             
@@ -88,13 +90,14 @@ class ParseClient : NSObject {
     
     // MARK: POST
     
-    func taskForPOSTMethod(method: String, parameters: [String : AnyObject]?, jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(method: String, parameters: [String : AnyObject], jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         /* 1. Set the parameters */
         //There are none
+        let parameters = [String : AnyObject]()
         
         /* 2/3. Build the URL and configure the request */
-        let urlString = ParseClient.Constants.BaseURLSecure + method
+        let urlString = ParseClient.Constants.BaseURLSecure + method + ParseClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
@@ -110,6 +113,7 @@ class ParseClient : NSObject {
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
+                completionHandler(result: nil, error: error)
                 return
             }
             

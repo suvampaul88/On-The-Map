@@ -12,6 +12,10 @@ extension ParseClient {
 
     // MARK: Constants
     struct Constants {
+
+//        bad API key for server side testing
+//        static let ParseAPIKey: String = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM7"
+
         
         static let ParseAPIKey: String = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
         static let ParseApplicationID: String = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
@@ -20,6 +24,7 @@ extension ParseClient {
         
         static let Number: Int = 100
         
+        static let OrderFormat: String = "-updatedAt"
     }
     
     // MARK: Methods
@@ -41,6 +46,7 @@ extension ParseClient {
         static let Latitude = "latitude"
         static let Longitude = "longitude"
         static let Limit = "limit"
+        static let Order = "order"
     }
     
     // MARK: JSON Response Keys
