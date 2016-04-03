@@ -88,9 +88,6 @@ class ParseClient : NSObject {
     }
     
     
-    
-    
-    
     // MARK: POST
     
     func taskForPOSTMethod(method: String, parameters: [String : AnyObject], jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {

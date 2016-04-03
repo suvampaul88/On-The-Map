@@ -29,9 +29,6 @@ class UdacityClient : NSObject {
     
     // MARK: GET
     
-    // Not sure about best method: should I have parameter or not?
-
-    
     func taskForGETMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         /* 1. Set the parameters */
