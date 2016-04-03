@@ -53,6 +53,20 @@ class UdacityClient : NSObject {
                 return
             }
             
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+            
+            
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
+            
+            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            UdacityClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+            
+            
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
@@ -65,16 +79,6 @@ class UdacityClient : NSObject {
                 return
             }
             
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                print("No data was returned by the request!")
-                return
-            }
-            
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
-
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
-            UdacityClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
         }
         
         /* 7. Start the request */
@@ -116,17 +120,6 @@ class UdacityClient : NSObject {
                 return
             }
             
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                if let response = response as? NSHTTPURLResponse {
-                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
-                } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
-                } else {
-                    print("Your request returned an invalid response!")
-                }
-                return
-            }
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
@@ -138,6 +131,18 @@ class UdacityClient : NSObject {
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             UdacityClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                } else {
+                    print("Your request returned an invalid response!")
+                }
+                return
+            }
         }
         
         /* 7. Start the request */
@@ -187,18 +192,6 @@ class UdacityClient : NSObject {
                 return
             }
             
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                if let response = response as? NSHTTPURLResponse {
-                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
-                } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
-                } else {
-                    print("Your request returned an invalid response!")
-                }
-                return
-            }
-            
             /* GUARD: Was there any data returned? */
             guard let data = data else {
                 print("No data was returned by the request!")
@@ -210,6 +203,19 @@ class UdacityClient : NSObject {
             
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             UdacityClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
+            
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                } else {
+                    print("Your request returned an invalid response!")
+                }
+                return
+            }
         }
         
         /* 7. Start the request */

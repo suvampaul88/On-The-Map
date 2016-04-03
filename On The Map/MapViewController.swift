@@ -108,8 +108,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     
-    
-    
     func displayError(errorString: NSError?) {
         dispatch_async(dispatch_get_main_queue(), {
             if let errorString = errorString {

@@ -65,7 +65,7 @@ extension UdacityClient {
                     let userID = results[UdacityClient.JSONResponseKeys.UserKey] as? String
                     completionHandler(Success: true, userID: userID, error: nil)
                 } else {
-                    completionHandler(Success: false, userID: nil, error: NSError(domain: "Login parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse loginThroughUdacity"]))
+                    completionHandler(Success: false, userID: nil, error: NSError(domain: "Login parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to login. Please try again."]))
                 }
             }
         }

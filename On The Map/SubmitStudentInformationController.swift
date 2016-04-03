@@ -134,25 +134,8 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
                         self.presentViewController(alert, animated: true, completion: nil)
 
                     }
-                    
-//                    if error != nil {
-//                        
-//                        let alert = UIAlertController(title: "Failed to post location", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-//                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction!) -> Void in
-//                            // Do nothing
-//                        }))
-//                        self.presentViewController(alert, animated: true, completion: nil)
-//                        
-//                    } else {
-//                     
-//                        print("Location posted at \(createdAt!)")
-//                        self.dismissViewControllerAnimated(true, completion: nil)
-//                    
-//                    }
             }
-            
         }
-    
     }
     
     

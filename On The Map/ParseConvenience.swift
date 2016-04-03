@@ -29,7 +29,7 @@ extension ParseClient {
                     let locations =  StudentLocations.locationsFromResults(results)
                     completionHandler(success: true, result: locations, error: nil)
                 } else {
-                    completionHandler(success: false, result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocations parsing"]))
+                    completionHandler(success: false, result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get student locations."]))
                 }
             }
         }
@@ -59,7 +59,7 @@ extension ParseClient {
                 if let createdAt = JSONResult[ParseClient.JSONResponseKeys.CreatedAt] as? String {
                     completionHandler(Success: true, createdAt: createdAt, error: nil)
                 } else {
-                    completionHandler(Success: false, createdAt: nil, error: NSError(domain: "postStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postStudentLocations"]))
+                    completionHandler(Success: false, createdAt: nil, error: NSError(domain: "postStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not post information."]))
                 }
             }
         }

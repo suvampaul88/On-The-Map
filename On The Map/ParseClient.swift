@@ -56,6 +56,18 @@ class ParseClient : NSObject {
                 return
             }
             
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+            
+            
+            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            
+            
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
@@ -67,15 +79,6 @@ class ParseClient : NSObject {
                 }
                 return
             }
-            
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                print("No data was returned by the request!")
-                return
-            }
-            
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
-            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
         
         /* 7. Start the request */
@@ -117,6 +120,18 @@ class ParseClient : NSObject {
                 return
             }
             
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+            
+            
+            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+
+            
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
@@ -128,15 +143,6 @@ class ParseClient : NSObject {
                 }
                 return
             }
-            
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                print("No data was returned by the request!")
-                return
-            }
-            
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
-            ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
         
         /* 7. Start the request */

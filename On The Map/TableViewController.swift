@@ -91,19 +91,9 @@ class TableViewController: UITableViewController {
             } else {
                 
                 StudentInfo.locations = locations!
-//                StudentInfo.locations = locations!.sort({ self.stringToDate($0.createdAt).compare(self.stringToDate($1.createdAt)) == .OrderedDescending})
                 self.tableView.reloadData()
             }
         }
-        
-    }
-    
-
-    func stringToDate(stringDate:String) -> NSDate {
-      
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        return dateFormatter.dateFromString(stringDate)!
     }
 }
 
