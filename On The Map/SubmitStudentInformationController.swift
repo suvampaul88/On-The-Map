@@ -89,6 +89,11 @@ class SubmitStudentInformationController: UIViewController, UITextFieldDelegate 
                         self.mapView.addAnnotation(annotation)
                         self.mapView.centerCoordinate = annotation.coordinate
                         
+                        let span = MKCoordinateSpan(latitudeDelta: 0.00725, longitudeDelta: 0.00725)
+                        let region = MKCoordinateRegion(center: self.coordinates, span: span)
+                        self.mapView.setRegion(region, animated: true)
+                        
+                        
                     }
                     
                 }
